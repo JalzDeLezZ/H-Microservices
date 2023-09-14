@@ -8,3 +8,17 @@
 508 git add .
 509 git commit -m "[init] :: base project ✅"
 510 git status
+//only remove the last commit but keep the changes
+// remove the last commit
+511 git reset --soft HEAD~1
+// remove the 2 last commits
+513 git reset --soft HEAD~2
+
+$ npm i -D nodemon
+$ mkdir controllers middleware data utils routes
+$ touch controllers/index.js
+$ touch middleware/index.js
+$ touch data/index.js
+$ touch utils/index.js
+$ touch routes/index.js
+$ touch server.js

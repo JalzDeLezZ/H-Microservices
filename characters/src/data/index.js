@@ -7,7 +7,7 @@ module.exports = {
     return charactes;
   },
   create: async (character) => {
-    throw new Error("This is an error :: Create");
+    throw new Error("DB ERROR: Method not implemented");
     // charactes.push(character);
   },
 };
