@@ -1,4 +1,6 @@
+const { fn_handler } = require("../utils");
+
 module.exports = {
-  getCharacters: require("./getCharacters"),
-  createCharacter: require("./createCharacter"),
+  getCharacters: fn_handler(require("./getCharacters")),
+  createCharacter: fn_handler(require("./createCharacter")),
 };

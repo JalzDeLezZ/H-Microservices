@@ -2,6 +2,7 @@ const data = require("../data");
 const { res_handler } = require("../utils");
 
 module.exports = async (req, res) => {
-  const characters = await data.list();
-  res_handler(res, 200, characters);
+  console.log(req.body);
+  const character = await data.create(req.body);
+  res_handler(res, 201, character);
 };
