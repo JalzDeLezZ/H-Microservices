@@ -2,6 +2,7 @@
 502 cd <name_file>
 503 npm init -y
 504 npm i express morgan
+504 npm i http-proxy-middleware
 
 506 rm -rf .git
 507 git init
