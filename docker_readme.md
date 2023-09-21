@@ -11,6 +11,7 @@ My IP Address
 All Access
 0.0.0.0/0
 
+MONGO COMPASS
 mongodb+srv://<username>:<password>@cluster0.ziuy4wa.mongodb.net/
 
 <!-- DOCKER 1 -->
