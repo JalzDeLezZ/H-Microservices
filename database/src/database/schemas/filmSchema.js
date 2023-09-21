@@ -21,10 +21,33 @@ const filmSchema = new Schema({
   ],
 });
 
-filmSchema.statics.list = function () {
-  return this.find()
+/* --------------------------------------------------- */
+/* %%%%%%%%%%%%%%%%%%%%% METHODS %%%%%%%%%%%%%%%%%%%%% */
+/* --------------------------------------------------- */
+
+filmSchema.statics.list = async function () {
+  return await this.find()
     .populate("characters", ["_id", "name"])
     .populate("planets", ["_id", "name"]);
+};
+
+filmSchema.statics.gett = async function (_id) {
+  return await this.findById(_id)
+    .populate("characters", ["_id", "name"])
+    .populate("planets", ["_id", "name"]);
+};
+
+filmSchema.statics.insert = async function (data) {
+  const { _id } = data;
+  const film = await this.findById(_id);
+  if (film)
+    return {
+      error: true,
+      message: "Film already exists",
+      status: 409,
+      data: film,
+    };
+  return await this.create(data);
 };
 
 module.exports = filmSchema;

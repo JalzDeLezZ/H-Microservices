@@ -20,8 +20,12 @@ const characterSchema = new Schema({
   ], // FILMS ID REFERENCE
 });
 
-characterSchema.statics.list = function () {
-  return this.find()
+/* --------------------------------------------------- */
+/* %%%%%%%%%%%%%%%%%%%%% METHODS %%%%%%%%%%%%%%%%%%%%% */
+/* --------------------------------------------------- */
+
+characterSchema.statics.list = async function () {
+  return await this.find()
     .populate("films", ["_id", "title"])
     .populate("homeworld", ["_id", "name"]);
 };

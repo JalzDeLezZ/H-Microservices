@@ -3,8 +3,6 @@ const server = require("./src/server");
 const { Character, Film } = require("./src/database");
 // ↓↓↓ TESTS ↓↓↓
 
-Film.list().then((characters) => console.log(characters[0]));
-
 server.listen(8004, () => {
   console.log("Database server is running on port 8004");
 });

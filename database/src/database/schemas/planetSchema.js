@@ -11,9 +11,10 @@ const planetSchema = new Schema({
   terrain: String,
   surface_water: String,
   residents: [
+    //{ type: String, unique: true },
     {
       type: String,
-      unique: true, // Asegura que no haya duplicados
+      ref: "Character",
     },
   ],
   films: [
@@ -23,5 +24,15 @@ const planetSchema = new Schema({
     },
   ],
 });
+
+/* --------------------------------------------------- */
+/* %%%%%%%%%%%%%%%%%%%%% METHODS %%%%%%%%%%%%%%%%%%%%% */
+/* --------------------------------------------------- */
+
+planetSchema.statics.list = async function () {
+  return await this.find()
+    .populate("films", ["_id", "title"])
+    .populate("residents", ["_id", "name"]);
+};
 
 module.exports = planetSchema;
