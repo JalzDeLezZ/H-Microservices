@@ -11,7 +11,7 @@ server.use("/characters", router);
 
 server.use("*", (req, res) => {
   res.status(404).json({
-    error: "Not found",
+    error: "Character Service: " + "Not found",
   });
 });
 
@@ -19,7 +19,7 @@ server.use((err, req, res, next) => {
   //! console.error(err);
   res.status(err.statusCode || 500).json({
     error: true,
-    message: err.message,
+    message: "Character Service: " + err.message,
   });
 });
 

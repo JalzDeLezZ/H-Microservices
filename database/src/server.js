@@ -12,14 +12,14 @@ app.use(routes);
 app.use("*", (req, res) => {
   res.status(404).json({
     error: true,
-    message: "Route not found",
+    message: "Database Service: Route not found",
   });
 });
 
 app.use((err, req, res, next) => {
   res.status(err.statusCode || 500).json({
     error: true,
-    message: err.message,
+    message: "Database Service: " + err.message,
   });
 });
 

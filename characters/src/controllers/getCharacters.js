@@ -1,4 +1,3 @@
-const data = require("../data");
 const { res_handler } = require("../utils");
 
 module.exports = async (req, res) => {

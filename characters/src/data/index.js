@@ -1,13 +1,19 @@
-const charactes = require("./characters.json");
+const axios = require("axios");
 
 // DB simulation
 
 module.exports = {
   list: async () => {
-    return charactes;
+    const { data } = await axios.get("http://localhost:8004/Character");
+    return data;
+  },
+  getOne: async (id) => {
+    const { data } = await axios.get(`http://localhost:8004/Character/${id}`);
+    return data;
   },
   create: async (character) => {
-    throw new Error("DB ERROR: Method not implemented");
-    // charactes.push(character);
+    // throw new Error("DB ERROR: Method not implemented");
+    const { data } = await axios.post("http://localhost:8004/Character", character);
+    return data;
   },
 };

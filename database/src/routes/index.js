@@ -2,7 +2,6 @@ const { Router } = require("express");
 const router = Router();
 const { validateModelParam } = require("../middlewares/validateModelParam");
 const database_fn = require("../database");
-const { res_handler } = require("../utils/response");
 const catchedAsync = require("../utils/catchedAsync");
 
 router.get("/", (req, res) => {
@@ -11,13 +10,15 @@ router.get("/", (req, res) => {
   });
 });
 
+// :model > //! Character | Planet | Film
+
 router.get(
   "/:model",
   validateModelParam,
   catchedAsync(async (req, res) => {
     const { model } = req.params;
     const response = await database_fn[model]?.list();
-    res_handler(res, 200, response, "List of characters");
+    res.send(response);
   })
 );
 
@@ -27,7 +28,7 @@ router.get(
   catchedAsync(async (req, res) => {
     const { model, id } = req.params;
     const response = await database_fn[model]?.gett(id);
-    res_handler(res, 200, response);
+    res.send(response);
   })
 );
 
@@ -37,7 +38,7 @@ router.post(
   catchedAsync(async (req, res) => {
     const { model } = req.params;
     const response = await database_fn[model]?.insert(req.body);
-    res_handler(res, 201, response);
+    res.send(response);
   })
 );
 
