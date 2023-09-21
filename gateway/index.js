@@ -8,19 +8,19 @@ app.use(morgan("dev"));
 app.use(
   "/characters",
   createProxyMiddleware({
-    target: "http://characters:3001",
+    target: "http://characters_:3001",
     changeOrigin: true,
   })
 );
 
 app.use(
   "/films",
-  createProxyMiddleware({ target: "http://films:3002", changeOrigin: true })
+  createProxyMiddleware({ target: "http://films_:3002", changeOrigin: true })
 );
 
 app.use(
   "/planets",
-  createProxyMiddleware({ target: "http://planets:3003", changeOrigin: true })
+  createProxyMiddleware({ target: "http://planets_:3003", changeOrigin: true })
 );
 
 app.listen(3000, () => {
