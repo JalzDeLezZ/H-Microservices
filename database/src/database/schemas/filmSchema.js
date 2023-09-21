@@ -1,4 +1,5 @@
 const { Schema } = require("mongoose");
+const { ClientError } = require("../../utils/catchError");
 
 const filmSchema = new Schema({
   _id: String,
@@ -19,7 +20,7 @@ const filmSchema = new Schema({
       ref: "Planet",
     },
   ],
-});
+}, {timestamps: true})
 
 /* --------------------------------------------------- */
 /* %%%%%%%%%%%%%%%%%%%%% METHODS %%%%%%%%%%%%%%%%%%%%% */
@@ -40,13 +41,7 @@ filmSchema.statics.gett = async function (_id) {
 filmSchema.statics.insert = async function (data) {
   const { _id } = data;
   const film = await this.findById(_id);
-  if (film)
-    return {
-      error: true,
-      message: "Film already exists",
-      status: 409,
-      data: film,
-    };
+  if (film) throw new ClientError("Film already exists", 409);
   return await this.create(data);
 };
 

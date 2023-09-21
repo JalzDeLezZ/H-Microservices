@@ -1,4 +1,5 @@
 const { Schema } = require("mongoose");
+const { ClientError } = require("../../utils/catchError");
 
 const characterSchema = new Schema({
   // _id: Shema.Types.ObjectId,
@@ -11,14 +12,14 @@ const characterSchema = new Schema({
   eye_color: String,
   birth_year: String,
   gender: String,
-  homeworld: { type: String, ref: "Planet" }, // PLANET ID REFERENCE
+  homeworld: { type: String, ref: "Planet" },
   films: [
     {
       type: String,
       ref: "Film",
     },
-  ], // FILMS ID REFERENCE
-});
+  ],
+}, {timestamps: true})
 
 /* --------------------------------------------------- */
 /* %%%%%%%%%%%%%%%%%%%%% METHODS %%%%%%%%%%%%%%%%%%%%% */
@@ -40,15 +41,9 @@ characterSchema.statics.gett = async function (_id) {
 characterSchema.statics.insert = async function (data) {
   const { _id } = data;
   const character = await this.findOne({ _id });
-  if (character)
-    return {
-      error: true,
-      message: "Character already exists",
-      status: 409,
-      data: character,
-    };
-  // const newCharacter = new this(data);
-  // return await newCharacter.save();
+  if (character) {
+    throw new ClientError("Character already exists", 409);
+  }
   return await this.create(data);
 };
 

@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
 const { MONGO_URI } = require("../config/enviroments");
+const mongoose = require("mongoose");
 
 const conn = mongoose.createConnection(MONGO_URI);
 
@@ -12,26 +12,3 @@ module.exports = {
   Film,
   Planet,
 };
-
-// %%%%%%%%%%%%%%%%%%%%%%% TESTS %%%%%%%%%%%%%%%%%%%%%%%
-
-/* Character.find()
-  // .populate("films")
-  .populate("films", ["_id", "title"])
-  .then((characters) => {
-    console.log(characters[0]);
-  }); */
-
-/* Film.find()
-  .populate("planets", ["_id", "name"])
-  .then((films) => {
-    console.log(films[0]);
-  }); */
-
-/* Planet.find()
-  .populate("films", ["_id", "title"])
-  .then((planets) => {
-    console.log(planets[0]);
-  }); */
-
-// TEST EXECUTION: node database/src/database/index.js
