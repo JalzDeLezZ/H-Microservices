@@ -7,6 +7,14 @@ const Character = conn.model("Character", require("./schemas/characterSchema"));
 const Film = conn.model("Film", require("./schemas/filmSchema"));
 const Planet = conn.model("Planet", require("./schemas/planetSchema"));
 
+module.exports = {
+  Character,
+  Film,
+  Planet,
+};
+
+// %%%%%%%%%%%%%%%%%%%%%%% TESTS %%%%%%%%%%%%%%%%%%%%%%%
+
 /* Character.find()
   // .populate("films")
   .populate("films", ["_id", "title"])
@@ -20,15 +28,10 @@ const Planet = conn.model("Planet", require("./schemas/planetSchema"));
     console.log(films[0]);
   }); */
 
-Planet.find()
+/* Planet.find()
   .populate("films", ["_id", "title"])
   .then((planets) => {
     console.log(planets[0]);
-  });
+  }); */
 
 // TEST EXECUTION: node database/src/database/index.js
-
-module.exports = {
-  Character,
-  Film,
-};

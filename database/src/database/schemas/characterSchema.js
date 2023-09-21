@@ -20,4 +20,32 @@ const characterSchema = new Schema({
   ], // FILMS ID REFERENCE
 });
 
+characterSchema.statics.list = function () {
+  return this.find()
+    .populate("films", ["_id", "title"])
+    .populate("homeworld", ["_id", "name"]);
+};
+
+characterSchema.statics.gett = async function (_id) {
+  // return this.findById(_id) //* SUCCESFUL
+  return await this.findOne({ _id }) //* SUCCESFUL
+    .populate("films", ["_id", "title"])
+    .populate("homeworld", ["_id", "name"]);
+};
+
+characterSchema.statics.insert = async function (data) {
+  const { _id } = data;
+  const character = await this.findOne({ _id });
+  if (character)
+    return {
+      error: true,
+      message: "Character already exists",
+      status: 409,
+      data: character,
+    };
+  // const newCharacter = new this(data);
+  // return await newCharacter.save();
+  return await this.create(data);
+};
+
 module.exports = characterSchema;

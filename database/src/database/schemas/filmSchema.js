@@ -21,4 +21,10 @@ const filmSchema = new Schema({
   ],
 });
 
+filmSchema.statics.list = function () {
+  return this.find()
+    .populate("characters", ["_id", "name"])
+    .populate("planets", ["_id", "name"]);
+};
+
 module.exports = filmSchema;
