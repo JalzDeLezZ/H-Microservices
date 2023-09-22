@@ -1,25 +1,60 @@
 const { Schema } = require("mongoose");
 const { ClientError } = require("../../utils/catchError");
 
-const characterSchema = new Schema({
-  // _id: Shema.Types.ObjectId,
-  _id: String,
-  name: String,
-  height: String,
-  mass: String,
-  hair_color: String,
-  skin_color: String,
-  eye_color: String,
-  birth_year: String,
-  gender: String,
-  homeworld: { type: String, ref: "Planet" },
-  films: [
-    {
+// _id: Shema.Types.ObjectId,
+const characterSchema = new Schema(
+  {
+    _id: {
       type: String,
-      ref: "Film",
+      default: function () {
+        // Genera la fecha actual en formato de cadena
+        return new Date().toISOString();
+      },
     },
-  ],
-}, {timestamps: true})
+    name: {
+      type: String,
+      required: true,
+      trim: true, // Elimina espacios en blanco al principio y al final
+      maxlength: 100, // Define una longitud máxima para el nombre
+    },
+    height: {
+      type: String,
+      validate: {
+        validator: (value) => !isNaN(value), // Valida que sea un número
+        message: "Height must be a valid number.",
+      },
+    },
+    mass: {
+      type: String,
+      validate: {
+        validator: (value) => !isNaN(value), // Valida que sea un número
+        message: "Mass must be a valid number.",
+      },
+    },
+    hair_color: String,
+    skin_color: String,
+    eye_color: String,
+    birth_year: {
+      type: String,
+      validate: {
+        validator: (value) => /^[0-9]{4}$/.test(value), // Valida un formato de año específico (4 dígitos)
+        message: "Birth year must be a valid 4-digit year.",
+      },
+    },
+    gender: {
+      type: String,
+      enum: ["male", "female", "unknown"], // Define valores permitidos
+    },
+    homeworld: { type: String, ref: "Planet" },
+    films: [
+      {
+        type: String,
+        ref: "Film",
+      },
+    ],
+  },
+  { timestamps: true }
+);
 
 /* --------------------------------------------------- */
 /* %%%%%%%%%%%%%%%%%%%%% METHODS %%%%%%%%%%%%%%%%%%%%% */
@@ -32,8 +67,8 @@ characterSchema.statics.list = async function () {
 };
 
 characterSchema.statics.gett = async function (_id) {
-  // return this.findById(_id) //* SUCCESFUL
-  return await this.findOne({ _id }) //* SUCCESFUL
+  // return await this.findOne({ _id }) //* SUCCESFUL
+  return this.findById(_id) //* SUCCESFUL
     .populate("films", ["_id", "title"])
     .populate("homeworld", ["_id", "name"]);
 };
