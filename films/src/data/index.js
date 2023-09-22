@@ -1,9 +1,14 @@
+const axios = require("axios");
 const { ClientError } = require("../utils/errors");
 const films = require("./films.json");
 
+//! const url_conn = "http://localhost:8004/Film";
+const url_conn = "http://database_:8004/Film";
+
 // DB simulation
 const list = async () => {
-  return films;
+  const { data } = await axios.get(url_conn);
+  return data;
 };
 
 const create = async (film) => {

@@ -11,3 +11,6 @@ COPY . .
 EXPOSE 3001
 
 CMD [ "npm", "start" ]
+
+# docker build -t icharacters .
+# docker run -dp 3001:3001 --network=starwars --name=characters_ icharacters

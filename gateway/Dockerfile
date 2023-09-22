@@ -11,3 +11,6 @@ COPY . .
 EXPOSE 3000
 
 CMD [ "npm", "start" ]
+
+# docker build -t igateway .
+# docker run -dp 3000:3000 --network=starwars --name=gateway_ igateway
