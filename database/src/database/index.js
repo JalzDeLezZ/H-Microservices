@@ -8,7 +8,7 @@ const Film = conn.model("Film", require("./schemas/filmSchema"));
 const Planet = conn.model("Planet", require("./schemas/planetSchema"));
 
 module.exports = {
-  Character,
+  Characterx: Character,
   Film,
   Planet,
 };

@@ -16,7 +16,7 @@ server.use("*", (req, res) => {
 });
 
 server.use((err, req, res, next) => {
-  !console.error(err);
+  // !console.error(err);
   res.status(err.statusCode || 500).json({
     error: true,
     message: "Character Service: " + err.message,

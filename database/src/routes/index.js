@@ -42,4 +42,14 @@ router.post(
   })
 );
 
+router.delete(
+  "/:model/:id",
+  validateModelParam,
+  catchedAsync(async (req, res) => {
+    const { model, id } = req.params;
+    const response = await database_fn[model]?.removee(id);
+    res.send(response);
+  })
+);
+
 module.exports = router;

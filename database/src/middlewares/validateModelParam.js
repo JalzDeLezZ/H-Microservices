@@ -2,10 +2,10 @@ const { ClientError } = require("../utils/catchError");
 
 function validateModelParam(req, res, next) {
   const { model } = req.params;
-  if (["Character", "Film", "Planet"].includes(model)) {
+  if (["Characterx", "Film", "Planet"].includes(model)) {
     next();
   } else {
-    throw new ClientError("Model not found", 404);
+    throw new ClientError("DB Service: Model not found", 404);
   }
 }
 

@@ -82,4 +82,13 @@ characterSchema.statics.insert = async function (data) {
   return await this.create(data);
 };
 
+characterSchema.statics.removee = async function (_id) {
+  // return await this.deleteOne({ _id });
+  const response = await this.findByIdAndDelete(_id);
+  if (!response) {
+    throw new ClientError("Character not found", 404);
+  }
+  return response;
+};
+
 module.exports = characterSchema;
