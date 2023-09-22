@@ -5,4 +5,5 @@ module.exports = {
   getCharacter: fn_handler(require("./getCharacter.js")),
   createCharacter: fn_handler(require("./createCharacter")),
   deleteCharacter: fn_handler(require("./deleteCharacter.js")),
+  updateCharacter: fn_handler(require("./updateCharacter.js")),
 };

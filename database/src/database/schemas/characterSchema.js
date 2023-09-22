@@ -91,4 +91,15 @@ characterSchema.statics.removee = async function (_id) {
   return response;
 };
 
+characterSchema.statics.updatee = async function (_id, data) {
+  const response = await this.findByIdAndUpdate(_id, data, {
+    new: true, // Devuelve el documento modificado
+    runValidators: true, // Ejecuta las validaciones del esquema
+  });
+  if (!response) {
+    throw new ClientError("Character not found", 404);
+  }
+  return response;
+};
+
 module.exports = characterSchema;

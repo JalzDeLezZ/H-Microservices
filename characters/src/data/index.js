@@ -25,4 +25,11 @@ module.exports = {
     );
     return data;
   },
+  updatexd: async (id, character) => {
+    const { data } = await axios.put(
+      `http://localhost:8004/Characterx/${id}`,
+      character
+    );
+    return data;
+  },
 };
